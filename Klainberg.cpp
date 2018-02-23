@@ -129,7 +129,7 @@ int main(int argc, char *argv[]) {
 			int last = (pow(cx - ex, 2) + pow(cy - ey, 2));
 
 			for (auto &i : Matrix[cx][cy]) {
-				tmp = (pow(i.X - ey, 2) + pow(i.Y - ey, 2));
+				tmp = (pow(i.X - ex, 2) + pow(i.Y - ey, 2));
 				if (tmp < last) {
 					last = tmp;
 					xm = i.X;
