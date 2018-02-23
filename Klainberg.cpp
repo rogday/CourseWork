@@ -126,10 +126,10 @@ int main(int argc, char *argv[]) {
 
 			int xm = 0, ym = 0;
 			int tmp;
-			int last = (pow(cx - ex, 2) + pow(cy - ey, 2));
+			int last = (abs(cx - ex) + abs(cy - ey));
 
 			for (auto &i : Matrix[cx][cy]) {
-				tmp = (pow(i.X - ex, 2) + pow(i.Y - ey, 2));
+				tmp = (abs(i.X - ex) + abs(i.Y - ey));
 				if (tmp < last) {
 					last = tmp;
 					xm = i.X;
