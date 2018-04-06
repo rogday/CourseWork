@@ -25,6 +25,23 @@ template <class T> class SkipList {
 	std::mt19937 gen;
 	std::discrete_distribution<> d;
 
+	Node<T> *getElement(T &val, Node<T> *origin) {
+		while (origin) {
+			auto i = origin->right;
+
+			for (; i != nullptr; origin = i, i = i->right)
+				if (val <= *(i->val))
+					break;
+
+			if (i && *(i->val) == val)
+				return origin;
+
+			origin = origin->down;
+		}
+
+		return nullptr;
+	}
+
   public:
 	SkipList(double p, int n)
 		: n(n), m(log(n) / log(1.0 / p) + 0.5), vec(m), gen(rd()),
@@ -68,6 +85,19 @@ template <class T> class SkipList {
 				break;
 	}
 
+	bool find(T val) { return (getElement(val, vec[0]) != nullptr); }
+
+	void remove(T val) {
+		auto elem = getElement(val, vec[0]);
+
+		while (elem != nullptr) {
+			auto save = elem->right->right;
+			delete elem->right;
+			elem->right = save;
+			elem = getElement(val, elem);
+		}
+	}
+
 	void print() {
 		std::cout << m << std::endl;
 
@@ -88,13 +118,28 @@ template <class T> class SkipList {
 template <class T> std::random_device SkipList<T>::rd;
 
 int main() {
-	int N = 100;
+	int N = 1000;
 	SkipList<int> myList(0.5, N);
+	std::list<int> test;
 
 	int i = 0;
-	while (++i < N)
-		myList.insert(rand());
+	while (++i < N) {
+		int num = rand();
+		test.push_back(num);
+		myList.insert(num);
+	}
 
 	myList.print();
+
+	for (auto &num : test) {
+		if (!myList.find(num))
+			std::cout << "Error: " << num << " not found!" << std::endl;
+
+		myList.remove(num);
+
+		if (myList.find(num))
+			std::cout << "Error: " << num << " is not removed!" << std::endl;
+	}
+
 	return 0;
 }
