@@ -57,6 +57,7 @@ int main(int argc, char *argv[]) {
 	int N = atoi(argv[1]);
 	vector<vector<Node>> Matrix(N, vector<Node>(N));
 
+	// p=1, q=1
 	intializeWeights(Matrix);
 
 	int startPoint = atoi(argv[2]), endPoint = atoi(argv[3]);
