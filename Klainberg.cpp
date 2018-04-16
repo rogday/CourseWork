@@ -65,7 +65,7 @@ int main(int argc, char *argv[]) {
 	ContextSettings set;
 	set.antialiasingLevel = 8;
 
-	RenderWindow window(sf::VideoMode(900, 900), "Klainberg Model",
+	RenderWindow window(sf::VideoMode(900, 900), "Kleinberg Model",
 						Style::Default, set);
 
 	window.setFramerateLimit(1);
