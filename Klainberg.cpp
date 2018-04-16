@@ -38,10 +38,10 @@ void intializeWeights(vector<vector<Node>> &Matrix) {
 
 			for (int j = 0; j < N; ++j)
 				for (int m = 0; m < N; ++m) {
-					if ((j > i + 1 || j < i - 1) && (m > k + 1 || m < k - 1))
-						weights.push_back(1.0f /
-										  (pow(i - j, 2) + pow(k - m, 2)));
-					else
+					if ((j > i + 1 || j < i - 1) && (m > k + 1 || m < k - 1)) {
+						int d = (abs(i - j) + abs(k - m));
+						weights.push_back(1.0f / (d * d));
+					} else
 						weights.push_back(0);
 				}
 
