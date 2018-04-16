@@ -48,8 +48,8 @@ void intializeWeights(vector<vector<Node>> &Matrix) {
 			discrete_distribution<> d(weights.begin(), weights.end());
 			int con = d(gen);
 
-			Matrix[i][k].push_back({con % N, con / N});
-			Matrix[con % N][con / N].push_back({i, k});
+			Matrix[i][k].push_back({con / N, con % N});
+			Matrix[con / N][con % N].push_back({i, k});
 		}
 }
 
